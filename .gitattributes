@@ -1,0 +1,7 @@
+# 仓库内统一 LF，Dify 插件运行在 Linux 容器里
+* text=auto eol=lf
+
+*.exe binary
+*.difypkg binary
+*.png binary
+*.jpg binary

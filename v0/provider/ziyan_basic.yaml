@@ -1,0 +1,18 @@
+identity:
+  author: honinbo123
+  name: ziyan_basic
+  label:
+    en_US: Ziyan Basic
+    zh_Hans: 紫烟基础示例
+  description:
+    en_US: Text length demo tool.
+    zh_Hans: 文本长度示例工具。
+  icon: icon.svg
+  tags:
+    - utilities
+credentials_for_provider: {}
+tools:
+  - tools/text_length.yaml
+extra:
+  python:
+    source: provider/ziyan_basic.py

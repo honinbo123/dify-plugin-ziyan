@@ -1,0 +1,29 @@
+version: 0.0.1
+type: plugin
+author: honinbo123
+name: ziyan_basic
+label:
+  en_US: Ziyan Basic
+  zh_Hans: 紫烟基础示例
+description:
+  en_US: Take a text variable and return its character length plus a message.
+  zh_Hans: 接收一个文本变量，返回字符长度和一条提示信息。
+icon: icon.svg
+resource:
+  memory: 134217728
+  permission:
+    tool:
+      enabled: true
+plugins:
+  tools:
+    - provider/ziyan_basic.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2026-11-05T09:33:00Z

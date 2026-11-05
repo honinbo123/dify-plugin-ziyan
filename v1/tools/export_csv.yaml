@@ -1,0 +1,77 @@
+identity:
+  name: export_csv
+  author: ziyan
+  label:
+    en_US: Export CSV
+    zh_Hans: 导出 CSV
+description:
+  human:
+    en_US: Clean or aggregate an uploaded file with SQL and export the result as a downloadable CSV file.
+    zh_Hans: 用 SQL 对上传的文件做清洗或聚合，把结果导出为可下载的 CSV 文件。
+  llm: >
+    Apply a read-only SQL transformation to an uploaded tabular file and return the result as a downloadable CSV file.
+    The input is registered as a DuckDB table named "data".
+    Use this when the user wants a cleaned / filtered / aggregated file back rather than rows inside the chat.
+parameters:
+  - name: data_file
+    type: file
+    required: true
+    label:
+      en_US: Data File
+      zh_Hans: 数据文件
+    human_description:
+      en_US: The CSV / TSV / Excel file to transform.
+      zh_Hans: 需要处理的 CSV / TSV / Excel 文件。
+    llm_description: The tabular data file uploaded by the user.
+    form: llm
+  - name: sql
+    type: string
+    required: false
+    label:
+      en_US: SQL
+      zh_Hans: SQL 语句
+    human_description:
+      en_US: A single read-only statement, defaults to `SELECT * FROM data`.
+      zh_Hans: 单条只读语句，不填则原样导出（SELECT * FROM data）。
+    llm_description: A read-only DuckDB SQL statement over the table `data`, e.g. SELECT region, SUM(amount) AS total FROM data GROUP BY region.
+    form: llm
+  - name: file_name
+    type: string
+    required: false
+    default: export
+    label:
+      en_US: File Name
+      zh_Hans: 文件名
+    human_description:
+      en_US: Name of the exported file, without extension.
+      zh_Hans: 导出的文件名，无需带扩展名。
+    llm_description: Output file name without extension.
+    form: llm
+  - name: encoding
+    type: select
+    required: false
+    default: utf-8-sig
+    options:
+      - value: utf-8-sig
+        label:
+          en_US: UTF-8 with BOM (Excel friendly)
+          zh_Hans: UTF-8 带 BOM（Excel 不乱码）
+      - value: utf-8
+        label:
+          en_US: UTF-8
+          zh_Hans: UTF-8
+      - value: gbk
+        label:
+          en_US: GBK
+          zh_Hans: GBK
+    label:
+      en_US: Encoding
+      zh_Hans: 编码
+    human_description:
+      en_US: Use UTF-8 with BOM if the file will be opened in Excel on Windows.
+      zh_Hans: 如果文件要用 Windows 版 Excel 打开，选 UTF-8 带 BOM。
+    llm_description: Output encoding, one of utf-8-sig, utf-8, gbk.
+    form: llm
+extra:
+  python:
+    source: tools/export_csv.py

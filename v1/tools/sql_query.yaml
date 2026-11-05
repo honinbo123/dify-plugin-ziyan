@@ -1,0 +1,79 @@
+identity:
+  name: sql_query
+  author: ziyan
+  label:
+    en_US: SQL Query
+    zh_Hans: SQL 查询
+description:
+  human:
+    en_US: Run a read-only SQL query (DuckDB) against an uploaded CSV / Excel file. The table is named `data`.
+    zh_Hans: 对上传的 CSV / Excel 执行只读 SQL（DuckDB），数据表名为 data。
+  llm: >
+    Execute one read-only SQL statement against an uploaded tabular file.
+    The file is registered as a DuckDB table named "data".
+    Use double quotes around column names that contain Chinese characters, spaces or special symbols,
+    for example SELECT "销售额" FROM data WHERE "地区" = '华东'.
+    Date columns coming from CSV are stored as text: cast them explicitly, e.g. "日期"::DATE,
+    then use date_trunc('month', "日期"::DATE) for monthly grouping.
+    Supports SELECT / WITH / FROM-first / DESCRIBE / SUMMARIZE. Returns the result rows as JSON.
+parameters:
+  - name: data_file
+    type: file
+    required: true
+    label:
+      en_US: Data File
+      zh_Hans: 数据文件
+    human_description:
+      en_US: The CSV / TSV / Excel file to query.
+      zh_Hans: 需要查询的 CSV / TSV / Excel 文件。
+    llm_description: The tabular data file uploaded by the user.
+    form: llm
+  - name: sql
+    type: string
+    required: true
+    label:
+      en_US: SQL
+      zh_Hans: SQL 语句
+    human_description:
+      en_US: A single read-only statement. The table name is `data`.
+      zh_Hans: 单条只读语句，表名固定为 data。
+    llm_description: One read-only DuckDB SQL statement over the table `data`.
+    form: llm
+  - name: limit
+    type: number
+    required: false
+    default: 200
+    min: 1
+    max: 2000
+    label:
+      en_US: Row Limit
+      zh_Hans: 返回行数上限
+    human_description:
+      en_US: Maximum rows returned to the workflow. Defaults to 200 to protect the context window.
+      zh_Hans: 最多返回多少行，默认 200，避免撑爆上下文。
+    llm_description: Maximum number of rows to return.
+    form: llm
+  - name: output_format
+    type: select
+    required: false
+    default: json
+    options:
+      - value: json
+        label:
+          en_US: JSON
+          zh_Hans: JSON
+      - value: markdown
+        label:
+          en_US: Markdown table
+          zh_Hans: Markdown 表格
+    label:
+      en_US: Output Format
+      zh_Hans: 输出格式
+    human_description:
+      en_US: JSON is easier for downstream nodes, Markdown is easier for the model to read.
+      zh_Hans: JSON 便于下游节点引用，Markdown 更便于模型直接阅读。
+    llm_description: Output format, json or markdown.
+    form: llm
+extra:
+  python:
+    source: tools/sql_query.py

@@ -1,0 +1,35 @@
+version: 0.0.1
+type: plugin
+author: ziyan
+name: ziyan
+label:
+  en_US: Ziyan Data Analytics
+  zh_Hans: 紫烟数据分析
+description:
+  en_US: Profile CSV / Excel files, run SQL analytics with DuckDB, and export results as CSV. All processing happens inside the plugin container.
+  zh_Hans: 用 pandas 与 DuckDB 对 CSV / Excel 文件做数据画像、SQL 查询与结果导出，全部计算在插件容器内完成。
+icon: icon.svg
+resource:
+  memory: 536870912
+  permission:
+    tool:
+      enabled: true
+    storage:
+      enabled: true
+plugins:
+  tools:
+    - provider/ziyan_data.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2026-11-05T09:25:00Z
+privacy: PRIVACY.md
+tags:
+  - utilities
+  - productivity

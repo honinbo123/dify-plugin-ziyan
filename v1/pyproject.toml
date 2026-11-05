@@ -1,0 +1,19 @@
+[project]
+name = "ziyan"
+version = "0.0.1"
+description = "Dify tool plugin for tabular data profiling, SQL analytics and CSV export"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dify_plugin>=0.9.0,<1.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pandas>=2.2.3,<3.0.0",
+    "openpyxl>=3.1.5,<4.0.0",
+    "duckdb>=1.1.3,<2.0.0",
+]
+
+[tool.uv]
+package = false

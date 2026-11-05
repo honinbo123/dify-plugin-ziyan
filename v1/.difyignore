@@ -1,0 +1,16 @@
+.git
+.github
+.idea
+.vscode
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+.env
+.env.local
+*.difypkg
+.pytest_cache
+.ruff_cache
+.DS_Store
+tests

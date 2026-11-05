@@ -1,0 +1,20 @@
+identity:
+  author: ziyan
+  name: ziyan_data
+  label:
+    en_US: Ziyan Data
+    zh_Hans: 紫烟数据
+  description:
+    en_US: Tabular data profiling, SQL analytics and export.
+    zh_Hans: 表格数据画像、SQL 分析与导出。
+  icon: icon.svg
+  tags:
+    - utilities
+credentials_for_provider: {}
+tools:
+  - tools/profile_data.yaml
+  - tools/sql_query.yaml
+  - tools/export_csv.yaml
+extra:
+  python:
+    source: provider/ziyan_data.py

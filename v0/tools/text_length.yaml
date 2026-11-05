@@ -1,0 +1,29 @@
+identity:
+  name: text_length
+  author: honinbo123
+  label:
+    en_US: Text Length
+    zh_Hans: 文本长度
+description:
+  human:
+    en_US: Take a text variable and return its character length plus a message.
+    zh_Hans: 接收一个文本变量，返回字符长度和一条提示信息。
+  llm: >
+    Count the characters of the given text.
+    Returns JSON with "length" (number) and "message" (string).
+    Use it whenever the user asks for the length of a text.
+parameters:
+  - name: text
+    type: string
+    required: true
+    label:
+      en_US: Text
+      zh_Hans: 文本
+    human_description:
+      en_US: The text to measure. Bind an upstream variable here.
+      zh_Hans: 要统计长度的文本，可绑定上游节点变量。
+    llm_description: The text whose character length should be counted.
+    form: llm
+extra:
+  python:
+    source: tools/text_length.py

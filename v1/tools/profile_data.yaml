@@ -1,0 +1,59 @@
+identity:
+  name: profile_data
+  author: ziyan
+  label:
+    en_US: Profile Data
+    zh_Hans: 数据画像
+description:
+  human:
+    en_US: Profile an uploaded CSV / Excel file - shape, dtypes, missing values, numeric stats and top categories.
+    zh_Hans: 对上传的 CSV / Excel 做数据画像：行列数、字段类型、缺失情况、数值统计与高频取值。
+  llm: >
+    Load an uploaded tabular file (csv, tsv, xlsx, xls, json, parquet) and return its data profile as JSON:
+    row and column count, per-column dtype, missing values, numeric statistics, top categorical values and sample rows.
+    Text columns whose values look like dates or numbers carry a semantic_hint field (date / numeric_text),
+    which tells you they need an explicit CAST in SQL.
+    Always call this before writing analysis SQL, so you know the real column names and data quality issues.
+parameters:
+  - name: data_file
+    type: file
+    required: true
+    label:
+      en_US: Data File
+      zh_Hans: 数据文件
+    human_description:
+      en_US: The CSV / TSV / Excel file to profile.
+      zh_Hans: 需要画像的 CSV / TSV / Excel 文件。
+    llm_description: The tabular data file uploaded by the user.
+    form: llm
+  - name: sample_rows
+    type: number
+    required: false
+    default: 5
+    min: 0
+    max: 100
+    label:
+      en_US: Sample Rows
+      zh_Hans: 预览行数
+    human_description:
+      en_US: How many rows to include in the preview. Set 0 to skip.
+      zh_Hans: 预览包含的行数，填 0 则不返回预览数据。
+    llm_description: Number of sample rows to return in the preview.
+    form: llm
+  - name: top_n
+    type: number
+    required: false
+    default: 5
+    min: 1
+    max: 50
+    label:
+      en_US: Top N Values
+      zh_Hans: 高频取值数
+    human_description:
+      en_US: How many most frequent values to report for each text column.
+      zh_Hans: 每个文本字段返回多少个高频取值。
+    llm_description: Number of most frequent values per categorical column.
+    form: llm
+extra:
+  python:
+    source: tools/profile_data.py

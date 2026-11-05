@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img">
+  <title>Ziyan Data Analytics</title>
+  <rect width="128" height="128" rx="28" fill="#EEEDFE"/>
+  <rect x="22" y="74" width="16" height="28" rx="5" fill="#AFA9EC"/>
+  <rect x="48" y="60" width="16" height="42" rx="5" fill="#7F77DD"/>
+  <rect x="74" y="68" width="16" height="34" rx="5" fill="#AFA9EC"/>
+  <rect x="100" y="52" width="16" height="50" rx="5" fill="#7F77DD"/>
+  <path d="M30 62 L56 44 L82 52 L108 32" fill="none" stroke="#534AB7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="108" cy="32" r="7" fill="#534AB7"/>
+</svg>

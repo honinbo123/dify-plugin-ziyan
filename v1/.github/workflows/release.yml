@@ -1,0 +1,37 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Dify plugin CLI
+        run: |
+          curl -fsSL -o dify \
+            "https://github.com/langgenius/dify-plugin-daemon/releases/latest/download/dify-plugin-linux-amd64"
+          chmod +x dify
+          ./dify version
+
+      - name: Package plugin
+        id: package
+        run: |
+          ./dify plugin package .
+          pkg="$(ls "$GITHUB_WORKSPACE"/*.difypkg | head -n 1)"
+          echo "artifact=$pkg" >> "$GITHUB_OUTPUT"
+          echo "packaged -> $pkg"
+
+      - name: Publish release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.package.outputs.artifact }}
+          generate_release_notes: true
